@@ -1,13 +1,13 @@
 import { InMemoryNotificationsRepository } from '../../../test/repositories/in-memory-notifications-repositories';
 
-import { SendNotifications } from './send-notifications';
+import { SendNotification } from './send-notification';
 
 describe('Send Notifications', () => {
   it('should be able to send a notification', async () => {
     const notificationsRepository = new InMemoryNotificationsRepository();
-    const sendNotifications = new SendNotifications(notificationsRepository);
+    const sendNotification = new SendNotification(notificationsRepository);
 
-    const { notification } = await sendNotifications.execute({
+    const { notification } = await sendNotification.execute({
       content: 'You receive a friend request from John Doe',
       category: 'social',
       recipientId: 'example-recipient-id',

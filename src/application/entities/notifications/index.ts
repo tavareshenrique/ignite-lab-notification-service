@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Replace } from 'src/helpers/Replace';
+import { Replace } from '@helpers/Replace';
 
 import { Content } from './content';
 
@@ -8,6 +8,7 @@ export interface INotificationParams {
   content: Content;
   category: string;
   readAt?: Date | null;
+  canceledAt?: Date | null;
   createdAt: Date;
 }
 
@@ -15,8 +16,11 @@ export class Notification {
   private _id: string;
   private params: INotificationParams;
 
-  constructor(params: Replace<INotificationParams, { createdAt?: Date }>) {
-    this._id = randomUUID();
+  constructor(
+    params: Replace<INotificationParams, { createdAt?: Date }>,
+    id?: string,
+  ) {
+    this._id = id ?? randomUUID();
     this.params = {
       ...params,
       createdAt: params.createdAt ?? new Date(),
@@ -51,12 +55,24 @@ export class Notification {
     return this.params.category;
   }
 
-  public set readAt(readAt: Date | null | undefined) {
-    this.params.readAt = readAt;
+  public read(): void {
+    this.params.readAt = new Date();
+  }
+
+  public unread(): void {
+    this.params.readAt = null;
   }
 
   public get readAt(): Date | null | undefined {
     return this.params.readAt;
+  }
+
+  public cancel(): void {
+    this.params.canceledAt = new Date();
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.params.canceledAt;
   }
 
   public get createdAt(): Date {

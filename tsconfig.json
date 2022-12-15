@@ -18,11 +18,12 @@
     "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
     "paths": {
       "@application/*": ["./src/application/*"],
-      "@helper/*": ["./src/helpers//*"],
-      "@ingra/*": ["./src/infra/*"],
-      "@test/*": ["./test/*"],
+      "@helpers/*": ["./src/helpers//*"],
+      "@infra/*": ["./src/infra/*"],
+      "@test/*": ["./test/*"]
     }
   }
 }
